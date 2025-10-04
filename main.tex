@@ -27,6 +27,63 @@
 \section{Introduction}
 
 \section{Mathematical Methods}
+\begin{frame}{Context \cite{}}
+  Cardio vascular diseases (CVD) represent the $1^{st}$ cause of death in the world \cite{who2025cvd} :
+  \begin{itemize}
+    \item 32 \% of all global deaths in 2022
+    \item 85 \% of them were due to heart attack and stroke
+    \item 38 \% of the 18 million premature deaths (under 70) caused by CVDs
+    \item The sooner and the more precise the CVD diagnostic, the more efficient treatment 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Problems \cite{gerach2021electro}}
+    \begin{itemize}
+        \item Direct clinical studies limited by ethical and technical constraints
+        \item The complexity of the heart 
+        \begin{itemize}
+            \item Multi-scaled structure connected (cell $\rightarrow$ organ)
+            \item Multi-physics laws intertwined (Electrical, mechanical, fluid dynamics)
+        \end{itemize}
+        \item Lack of predictive medicine for current treatments
+        \item A solution : create computational models that reproduce "in silico" the physiologic structure and the multi-physics functions of a personalized heart
+        \begin{itemize}
+            \item enables preventive diagnostics
+            \item precise therapy "developments" and personalized planning 
+        \end{itemize}  
+    \end{itemize}
+\end{frame}
+
+\section{Objective of a Heart's DT}
+\begin{frame}{Objective}
+\begin{figure}
+    \centering
+    \begin{minipage}{0.55\linewidth}
+        \centering
+        \includegraphics[width=0.6\linewidth]{images/creation_cv_system_models.png}
+        \caption{Steps of the technique to create cardiovascular system models. \cite{sel2024digital} 
+        \newline
+        A, Modeling's Physiological aspects. B, Methods. C, Increasing modeling scale.}
+        \label{fig:step_creation_computational_model}
+    \end{minipage}\hfill
+    \begin{minipage}{0.40\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/DT_perso_health_trajectories.png}
+        \caption{Personalized health Trajectories \cite{sel2024digital}}
+        \label{fig:traject_perso}
+    \end{minipage}
+\end{figure}
+\end{frame}
+
+\section{Architecture of a Health's DT}
+\begin{frame}{Pipeline of a Health's DT}
+    \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{images/Architecture_health_dt.png}
+    \caption{Pipeline of health digital twin}
+    \label{fig:PipelineHealthDT}
+\end{figure}
+\end{frame}
 
 \subsection{DL/ML Methods}
 
