@@ -26,6 +26,33 @@
 
 \section{Introduction}
 
+\section{Mathematical Methods}
+
+\subsection{DL/ML Methods}
+
+\begin{frame}{POD-DL-ROM \cite{Fresca2021}}
+  \begin{itemize}
+    \item FOM - Cardiac Electrophysiology: coupled non-linear dynamical system.
+    \item \textbf{Inputs} - ionic model, conductivity... Multiple querries to build multi-scenario analysis.
+    \item Proposes a POD-DL-ROM pipeline - collection of FOM snapshots for efficient ROM parameter reconstruction - enhanced with POD.
+    \item \textbf{Output} - ACs, APs, ECGs... Fast and efficient evaluation.
+  \end{itemize}
+
+  \begin{figure}
+      \centering
+      \includegraphics[width=1\linewidth]{images/POD-DL-ROM-perf.png}
+      \caption{\textcite{Fresca2021}}
+  \end{figure}
+  
+\end{frame}
+
+\begin{frame}{Architecture}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\linewidth]{images/POD-DL-ROM-archi.png}
+      \caption{\textcite{Fresca2021}}
+  \end{figure}
+\end{frame}
 
 \section{Clinical Data \& Continuous Monitoring}
 \begin{frame}{Continuous monitoring devices}
