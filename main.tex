@@ -46,11 +46,30 @@
   
 \end{frame}
 
+
 \begin{frame}{Architecture}
     \begin{figure}
       \centering
       \includegraphics[width=1\linewidth]{images/POD-DL-ROM-archi.png}
       \caption{\textcite{Fresca2021}}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{PINNs \cite{jafari2022}}
+  \begin{itemize}
+    \item AI models can extract complex actionable data from time series, but require significant amounts of ground truth data. 
+    \item \textbf{PINNs}: neural networks are trained to solve problems leveraging underlying physics of input data.
+    \item Builds Taylor's approximations modelling the relationship between physiological features extracted from sensor measurements.
+    \item Yields a Taylor approximation in the form of a PDE.
+    \item The output of the network is the estimated continuous blood pressure.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Architecture}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\linewidth]{images/PINNs-archi.png}
+      \caption{\textcite{jafari2022}}
   \end{figure}
 \end{frame}
 
