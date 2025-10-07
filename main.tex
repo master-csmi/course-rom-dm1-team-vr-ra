@@ -26,14 +26,13 @@
 
 \section{Introduction}
 
-\section{Mathematical Methods}
+
 \begin{frame}{Context \cite{who2025cvd}}
-  Cardio vascular diseases (CVD) represent the $1^{st}$ cause of death in the world \cite{who2025cvd} :
+  Cardio vascular diseases (CVD) represent the \textbf{$1^{st}$ cause of death in the world} \cite{who2025cvd} :
   \begin{itemize}
-    \item 32 \% of all global deaths in 2022
-    \item 85 \% of them were due to heart attack and stroke
-    \item 38 \% of the 18 million premature deaths (under 70) caused by CVDs
-    \item The sooner and the more precise the CVD diagnostic, the more efficient treatment 
+    \item \textbf{32 \%} of all global deaths in 2022
+    \item \textbf{85 \%} of them were due to heart attack and stroke
+    \item \textbf{38 \%} of the 18 million premature deaths (under 70) caused by CVDs
   \end{itemize}
 \end{frame}
 
@@ -45,12 +44,7 @@
             \item Multi-scaled structure connected (cell $\rightarrow$ organ)
             \item Multi-physics laws intertwined (Electrical, mechanical, fluid dynamics)
         \end{itemize}
-        \item Lack of predictive medicine for current treatments
-        \item A solution : create computational models that reproduce "in silico" the physiologic structure and the multi-physics functions of a personalized heart
-        \begin{itemize}
-            \item enables preventive diagnostics
-            \item precise therapy "developments" and personalized planning 
-        \end{itemize}  
+        \item Lack of predictive medicine for current treatments 
     \end{itemize}
 \end{frame}
 
@@ -58,21 +52,40 @@
 \begin{frame}{Objective}
 \begin{figure}
     \centering
-    \begin{minipage}{0.55\linewidth}
-        \centering
-        \includegraphics[width=0.6\linewidth]{images/creation_cv_system_models.png}
-        \caption{Steps of the technique to create cardiovascular system models. \cite{sel2024digital} 
-        \newline
-        A, Modeling's Physiological aspects. B, Methods. C, Increasing modeling scale.}
-        \label{fig:step_creation_computational_model}
+    \begin{minipage}{0.5\linewidth}
+      \begin{itemize}
+        \item Create computational models that reproduce "in silico" the physiologic structure and the multi-physics functions of a personalized heart
+        \begin{itemize}
+            \item \textbf{enables preventive diagnostics}
+            \item \textbf{precise therapy developments and personalized planning}
+        \end{itemize}
+        \item The sooner and the more precise the CVD diagnostic, the more efficient the treatment
+      \end{itemize}
     \end{minipage}\hfill
-    \begin{minipage}{0.40\linewidth}
+    \begin{minipage}{0.45\linewidth}
         \centering
         \includegraphics[width=1\linewidth]{images/DT_perso_health_trajectories.png}
         \caption{Personalized health Trajectories \cite{sel2024digital}}
         \label{fig:traject_perso}
     \end{minipage}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Steps of the creation of cardiovascular system models}
+\begin{minipage}{0.5\linewidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{images/creation_cv_system_models.png}
+  \\
+  \scriptsize{\textcite{sel2024digital}}
+  \label{fig:step_creation_computational_model}
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+  \begin{itemize}
+    \item A : Modeling physiological aspects
+    \item B : Modeling Methods
+    \item C : Increasing modeling scale
+  \end{itemize}
+\end{minipage}
 \end{frame}
 
 \section{Architecture of a Health's DT}
@@ -83,6 +96,81 @@
     \caption{Pipeline of health digital twin}
     \label{fig:PipelineHealthDT}
 \end{figure}
+\end{frame}
+
+\section{Mathematical Models}
+
+\subsection{Numerical Methods for Cardiac Electrophysiology}
+\begin{frame}{FED (finite element discretization) for Cardiac Electrophysiology \textcite{gerach2021electro}}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/heart_discretization.png}
+    \caption{Four Chamber Heart Model discretization for FEM}
+    \label{fig:heart_discretization}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Mathematical aspects for Cardiac Electrophysiology \cite{gerach2021electro}}
+  Typical multi-physics and multi-scale model 
+  \begin{itemize}
+    \item \textbf{Cardiac electrophysiology (EP)} on $\Omega_{EP} = \Omega_A \cup \Omega_V \cup \Omega_{Valves}$
+    \begin{itemize}
+      \item On the microscopic or cellular level, reaction part
+      \item The diffusion on the macroscopic level
+    \end{itemize}
+    \item \textbf{Cardiac mechanics (M)} to describe the deformation on $W_M = W_V \cup W_A \cup W_{Valves} \cup W_{AdiposeTissue} \cup W_{MajorVessels} \cup W_{Pericardium}$
+    \item \textbf{Blood's loading conditions} imposed by the circulatory system
+  \end{itemize}
+  Simulation frameworks have been proposed that solve the complete \textbf{EP-M-FSI} system
+\end{frame}
+
+\begin{frame}{Solving Methods \cite{gerach2021electro}}
+  \begin{itemize}
+    \item In Space
+      \begin{itemize}
+        \item \textbf{Finite Element Method (FEM)} : in $\Omega_{M} \cup \Omega_{EP}$ to solve the coupled PDEs for the mechanical aspects
+        \item with Robin Boundary conditions / Sliding contact Problem: in $\Gamma_{P}$
+      \end{itemize}
+    \item In Time
+      \begin{itemize}
+        \item \textbf{Fluid/Structure Interaction (FSI)} : in $\Omega_{M}$ for the closed loop circulatory model coupled with the FEM presented above
+        \item \textbf{Operator Splitting Method} : in $\Omega_{EP}$ for the Electrophysiology equations
+        \item \textbf{Space-independent ODE} : for the reaction, solved by explicit integration methods (Runge-Kutta 4, Quasi-Newton) )
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Solving Methods \cite{gerach2021electro}}
+  \begin{itemize}
+    \item In Time (ctd)
+      \begin{itemize}
+        \item \textbf{Crank-Nicolson Scheme} : for the linear PDEs modeling the diffusion
+        \item \textbf{Lumped Parameters model} : Use to simplify the circulatory system modeling
+      \end{itemize}
+    \item \textbf{Inputs} 
+      \begin{itemize}
+        \item \textbf{Imagery data (MRI)} for Cardiac Anatomy, Fibers Orientation, Passive stress and Active stress
+        \item \textbf{ElectroCardioGram (ECG)} data body surface potential maps (BSPM) for EP model personalization
+      \end{itemize}
+    \item \textbf{Outputs} :
+    \begin{itemize}
+      \item \textbf{Calcium Transient (CaT)} : rapid, transient increase in intracellular calcium concentration $CaT(t)=[Ca^{2+}]_i(t)$
+      \item \textbf{Pressure}, \textbf{Volume} and \textbf{Flow evolution in time of left and right ventricles}
+      \item ...
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Parameters and time of calculation of the experiment}
+  \begin{itemize}
+  \item Final discretization whith GMSH :
+    \begin{itemize}
+      \item For $\Omega_{M}$ : 26,681 quadratic tetrahedras (h=7.2mm, 48,780 nodes) $\rightarrow$ 135,897 DOFs
+      \item For $\Omega_{EP}$ : 7,334,101 linear tetrahedras (h=0.6mm)
+    \end{itemize}
+  \item Run on 2019 Apple iMac (8 MPI processes)
+  \item Time of calculation for 1 heartbeat (0.8s) : 20 to 24 hours of computation
+  \end{itemize}
 \end{frame}
 
 \subsection{DL/ML Methods}
